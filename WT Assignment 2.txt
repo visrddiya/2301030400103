@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Zen</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: #483D8B; /* Deep purple/indigo color */
+            position: relative;
+        }
+        
+        .network {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Lines and paths */
+        .line {
+            position: absolute;
+            background-color: transparent;
+        }
+        
+        /* Node points */
+        .node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        /* Horizontal lines */
+        .h-line-1 {
+            top: 30%;
+            left: 0;
+            width: 90%;
+            height: 3px;
+            background-color: #1E90FF; /* Blue */
+        }
+        
+        .h-line-2 {
+            top: 45%;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: #32CD32; /* Green */
+        }
+        
+        .h-line-3 {
+            top: 60%;
+            left: 5%;
+            width: 85%;
+            height: 3px;
+            background-color: #FF6347; /* Red */
+        }
+        
+        /* Vertical and curved lines */
+        .v-line-1 {
+            top: 20%;
+            left: 15%;
+            width: 3px;
+            height: 30%;
+            background-color: #FF6347; /* Red */
+        }
+        
+        .v-line-2 {
+            top: 35%;
+            left: 40%;
+            width: 3px;
+            height: 25%;
+            background-color: #FFD700; /* Yellow */
+        }
+        
+        /* Dotted lines */
+        .dotted-h {
+            top: 38%;
+            left: 30%;
+            width: 15%;
+            height: 3px;
+            background: repeating-linear-gradient(to right, #FF6347 0, #FF6347 5px, transparent 5px, transparent 10px);
+        }
+        
+        .dotted-v {
+            top: 40%;
+            left: 50%;
+            width: 3px;
+            height: 15%;
+            background: repeating-linear-gradient(to bottom, #FFD700 0, #FFD700 5px, transparent 5px, transparent 10px);
+        }
+        
+        /* Nodes of different colors */
+        .node-red {
+            background-color: #FF6347;
+        }
+        
+        .node-blue {
+            background-color: #1E90FF;
+        }
+        
+        .node-green {
+            background-color: #32CD32;
+        }
+        
+        .node-yellow {
+            background-color: #FFD700;
+        }
+        
+        .node-white {
+            background-color: white;
+        }
+        
+        /* Curved paths - we'll simulate with borders */
+        .curved-path {
+            position: absolute;
+            border: 3px solid;
+            border-color: transparent;
+        }
+        
+        .curve-1 {
+            top: 25%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            border-color: #FF6347 transparent transparent #FF6347;
+            transform: rotate(-45deg);
+        }
+        
+        .curve-2 {
+            bottom: 25%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            border-color: #32CD32 #32CD32 transparent transparent;
+            transform: rotate(45deg);
+        }
+        
+        /* Title at the bottom */
+        .title {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            color: white;
+            font-size: 3.5rem;
+            letter-spacing: 0.5rem;
+            font-weight: lighter;
+        }
+        
+        /* Randomly positioned nodes */
+        .random-nodes {
+            position: absolute;
+        }
+        
+        /* Add arrow shape on right side */
+        .arrow {
+            position: absolute;
+            right: 10%;
+            top: 40%;
+            width: 150px;
+            height: 70px;
+            border: 3px solid white;
+            border-radius: 5px;
+            transform: skew(20deg);
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Network visualization -->
+        <div class="network">
+            <!-- Horizontal lines -->
+            <div class="line h-line-1"></div>
+            <div class="line h-line-2"></div>
+            <div class="line h-line-3"></div>
+            
+            <!-- Vertical lines -->
+            <div class="line v-line-1"></div>
+            <div class="line v-line-2"></div>
+            
+            <!-- Dotted lines -->
+            <div class="line dotted-h"></div>
+            <div class="line dotted-v"></div>
+            
+            <!-- Curved paths -->
+            <div class="curved-path curve-1"></div>
+            <div class="curved-path curve-2"></div>
+            
+            <!-- Arrow shape -->
+            <div class="arrow"></div>
+            
+            <!-- Nodes - Red -->
+            <div class="node node-red" style="top: 30%; left: 20%"></div>
+            <div class="node node-red" style="top: 60%; left: 15%"></div>
+            <div class="node node-red" style="top: 60%; left: 70%"></div>
+            <div class="node node-red" style="top: 35%; left: 85%"></div>
+            
+            <!-- Nodes - Blue -->
+            <div class="node node-blue" style="top: 30%; left: 25%"></div>
+            <div class="node node-blue" style="top: 30%; left: 40%"></div>
+            <div class="node node-blue" style="top: 45%; left: 50%"></div>
+            <div class="node node-blue" style="top: 38%; left: 75%"></div>
+            
+            <!-- Nodes - Green -->
+            <div class="node node-green" style="top: 45%; left: 30%"></div>
+            <div class="node node-green" style="top: 45%; left: 45%"></div>
+            <div class="node node-green" style="top: 45%; left: 65%"></div>
+            <div class="node node-green" style="top: 58%; left: 78%"></div>
+            
+            <!-- Nodes - Yellow -->
+            <div class="node node-yellow" style="top: 40%; left: 58%"></div>
+            <div class="node node-yellow" style="top: 35%; left: 65%"></div>
+            <div class="node node-yellow" style="top: 50%; left: 72%"></div>
+            <div class="node node-yellow" style="top: 30%; left: 78%"></div>
+            
+            <!-- Nodes - White -->
+            <div class="node node-white" style="top: 30%; left: 10%"></div>
+            <div class="node node-white" style="top: 45%; left: 52%"></div>
+            <div class="node node-white" style="top: 38%; left: 85%"></div>
+        </div>
+        
+        <!-- Title -->
+        <div class="title">CAREER ZEN</div>
+    </div>
+</body>
+</html>
